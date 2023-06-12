@@ -16,18 +16,9 @@ ap = network.WLAN(network.AP_IF)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
-# functions
-def collect_garbage(limit: int = 50000) -> None:
-    mem = gc.mem_free()
-    # print("\nFree Memory:", mem)
-    if mem < limit:
-        print('Collecting garbage...')
-        gc.collect()
-
-
 # logic
 esp.osdebug(None)
-collect_garbage()
+gc.threshold(50000)
 
 ap.active(True)
 ap.config(essid=AP_SSID, password=AP_PASSWORD, authmode=3)
@@ -41,17 +32,16 @@ s.bind(('', 80))
 s.listen(5)
 
 while True:
-    collect_garbage()
-
     # handle connection
     conn, addr = s.accept()
-    print('\nConnection:', addr)
     req = str(conn.recv(1024), 'utf-8')
-    print(req)
 
     # screw favicon
     if "/favicon.ico" in req:
         continue
+
+    print('\nConnection:', addr)
+    print(req)
 
     # process request
     resp = net.generate_response(req)
