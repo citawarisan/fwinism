@@ -28,4 +28,5 @@ def generate_response(req: str) -> bytes:
         path, params = get_param(path)
         doc = web.handle(path, params)
         resp = resp.format(STATUS_OK, "", doc)
+    # print(resp)
     return resp.encode('utf-8')
