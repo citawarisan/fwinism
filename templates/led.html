@@ -2,14 +2,17 @@
 
 <head>
     <title>LED</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="/css">
 </head>
 
 <body>
     <h1>LED</h1>
-    <p>GPIO: <strong>{{state}}</strong></p>
-    <p><a href="?v=1" role="button">ON</a></p>
-    <p><a href="?v=0" role="button">OFF</a></p>
+    <h2>GPIO: {{state}}</h2>
+    <p>
+        <a href="?v=1">ON</a>
+        <a href="?v=0">OFF</a>
+    </p>
+    <h2><a href="/">Index</a></h2>
 </body>
 
 </html>

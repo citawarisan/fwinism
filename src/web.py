@@ -1,6 +1,7 @@
 import network
 import re
 from machine import Pin
+import time
 
 
 # pseudoflask
@@ -16,14 +17,15 @@ def index() -> str:
 
 
 def wifi() -> str:
-    wifi = network.WLAN(network.STA_IF)
-    wifi.active(True)
-    networks = wifi.scan()
+    sta = network.WLAN(network.STA_IF)
+    sta.active(True)
+    essid = sta.config('essid') or "None"
+    networks = sta.scan()
     ssids = [network[0].decode() for network in networks]
-    option = ""
+    options = ""
     for ssid in ssids:
-        option += "<option value='" + ssid + "'>" + ssid + "</option>"
-    return render_template('wifi.html', option=option)
+        options += "<option value='" + ssid + "'>" + ssid + "</option>"
+    return render_template('sta.html', essid=essid, options=options)
 
 
 def led(value: int = 0) -> str:
@@ -38,5 +40,7 @@ def handle(path: str, params: dict) -> str:
             v = int(params['v'])
             Pin(2, Pin.OUT).value(v)
         return led(v)
+    elif re.match(r'^/sta(\?ssid=.+\&pw=.+)?$', path):
+        return wifi()
     else:
         return index()
