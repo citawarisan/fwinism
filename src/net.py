@@ -22,7 +22,7 @@ def parse_query(query: str) -> dict:
     params = {}
     for param in query.split("&"):
         key, value = param.split("=")
-        params[key] = value.replace("+", " ")
+        params[key] = value.replace("+", " ").replace("%40", "@")
     return params
 
 
@@ -45,14 +45,17 @@ def generate_response(path: str, params: dict):
         content = 'css'
         body = web.css()
     elif path == '/sta':
+        status = STATUS_FOUND
         body = web.wifi()
     elif path == '/led':
         if 'v' in params:
             v = int(params['v'])
             web.led(v)
         body = web.led()
+    elif path == '/fav':
+        status = STATUS_FOUND
+        body = web.fav()
     else:
-        status = STATUS_OK
         body = web.index()
 
     header = HEADER.format(status, content)

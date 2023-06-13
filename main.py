@@ -4,6 +4,7 @@ import usocket as socket
 from machine import Pin
 import network
 import time
+from umqtt.simple import MQTTClient
 
 import src.net as net
 
@@ -42,6 +43,17 @@ def wrap_up(path: str, params: dict) -> None:
             if 'v' in params:
                 v = int(params['v'])
             led.value(v)
+        elif path == "/fav":
+            if 'token' in params and 'id' in params and 'data' in params:
+                TOKEN, ID, DATA = params['token'], params['id'], params['data']
+                client = MQTTClient("umqtt_client", "mqtt.favoriot.com", user=TOKEN, password=TOKEN)
+                try:
+                    client.connect()
+                    client.publish(TOKEN + "/v2/streams", '{ "device_developer_id": "' + ID + '", "data": {"test": "' + DATA + '"} }')
+                    client.disconnect()
+                except Exception as e:
+                    print("Failed to publish")
+                    print(e)
 
 
 # logic
@@ -56,7 +68,7 @@ print("SSID:", AP_SSID)
 print("Password:", AP_PASSWORD)
 print("IP:", ap.ifconfig()[0])
 
-s.bind(('0.0.0.0', 80))
+s.bind(('', 80))
 s.listen(5)
 
 while True:
@@ -77,4 +89,5 @@ while True:
     conn.sendall(resp)
     conn.close()
 
+    # perform iot related task
     wrap_up(path, params)

@@ -21,10 +21,8 @@ def wifi() -> str:
     sta.active(True)
     essid = sta.config('essid') or "None"
     networks = sta.scan()
-    ssids = [network[0].decode() for network in networks]
-    options = ""
-    for ssid in ssids:
-        options += "<option value='" + ssid + "'>" + ssid + "</option>"
+    ssids = set(network[0].decode() for network in networks) 
+    options = "".join(f"<option value='{ssid}'>{ssid}</option>" for ssid in ssids)
     return render_template('sta.html', essid=essid, options=options)
 
 
@@ -35,3 +33,7 @@ def css() -> str:
 def led(value: int = 0) -> str:
     state = "ON" if value else "OFF"
     return render_template('led.html', state=state)
+
+
+def fav() -> str:
+    return render_template('fav.html')
