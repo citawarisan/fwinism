@@ -17,6 +17,32 @@ ap = network.WLAN(network.AP_IF)
 sta = network.WLAN(network.STA_IF)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+IGNORE = ['favicon.ico']
+
+
+def wrap_up(path: str, params: dict) -> None:
+    if params:
+        if path == "/sta":
+            ssid = params['ssid']
+            password = params['pw']
+            sta.disconnect()
+            sta.connect(ssid, password)
+            for _ in range(20):
+                if sta.isconnected():
+                    break
+                time.sleep(0.5)
+            print('\nStation')
+            if sta.isconnected():
+                print("IP:", sta.ifconfig()[0])
+            else:
+                sta.disconnect()
+                print("Failed to connect")
+        elif path == "/led":
+            v = 0
+            if 'v' in params:
+                v = int(params['v'])
+            led.value(v)
+
 
 # logic
 esp.osdebug(None)
@@ -38,32 +64,17 @@ while True:
     conn, addr = s.accept()
     req = str(conn.recv(1024), 'utf-8')
 
-    # screw favicon
-    if "/favicon.ico" in req:
+    # ignore irrelevant requests
+    if any(path in req for path in IGNORE):
         continue
 
     print('\nConnection:', addr)
-    print(req)
+    print(req.splitlines()[0])
 
-    # process request
-    resp = net.generate_response(req)
+    # handle request
+    path, params, resp = net.handle_request(req)
 
-    conn.send(resp)
+    conn.sendall(resp)
     conn.close()
 
-    path, params = net.get_param(req.split(" ", 2)[1])
-    if path == "/sta":
-        if params:
-            ssid = params['ssid']
-            password = params['pw']
-            sta.disconnect()
-            sta.connect(ssid, password)
-            for _ in range(10):
-                if sta.isconnected():
-                    break
-                time.sleep(1)
-            print('\nStation')
-            if sta.isconnected():
-                print("IP:", sta.ifconfig()[0])
-            else:
-                print("Failed to connect")
+    wrap_up(path, params)
