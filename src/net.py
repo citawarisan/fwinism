@@ -4,18 +4,21 @@ import src.web as web
 
 
 HEADER = """\
-HTTP/1.1 {}
-Content-Type: text/{}
-Connection: close
-"""
+HTTP/1.1 {}"""
 
 STATUS_OK = '200 OK'
 STATUS_FOUND = '302 Found'
 STATUS_404 = '404 Not Found'
 
+HEADER_TYPE = 'Content-Type: text/{}'
+HEADER_LOCATION = 'Location: {}'
+HEADER_CLOSE = 'Connection: close'
+
 
 def scramble(*args: str) -> bytes:
-    return ('\n'.join(args) + "\n\n").encode('utf-8')
+    h = ('\n'.join(args) + "\r\n").encode('utf-8')
+    # print(str(h)) # debug
+    return h
 
 
 def parse_query(query: str) -> dict:
@@ -23,11 +26,13 @@ def parse_query(query: str) -> dict:
     for param in query.split("&"):
         key, value = param.split("=")
         params[key] = value.replace("+", " ").replace("%40", "@")
+    print(params) # debug
     return params
 
 
 def get_params(path: str):
     path, query = path.split("?", 1)
+    # print(path, query) # debug
     return path, parse_query(query)
 
 
@@ -38,17 +43,18 @@ def post_params(req: str):
 
 def generate_response(path: str, params: dict):
     status = STATUS_OK
-    content = 'html'
     headers = []
+    body = ""
 
     if path == '/css':
-        content = 'css'
+        headers.append(HEADER_TYPE.format('css'))
         body = web.css()
     elif path == '/sta':
         if 'ssid' in params and 'pw' in params:
             status = STATUS_FOUND
-            headers.append('Location: /')
+            headers.append(HEADER_LOCATION.format('/'))
         else:
+            headers.append(HEADER_TYPE.format('html'))
             sta = network.WLAN(network.STA_IF)
             sta.active(True)
             essid = sta.config('essid') or "None"
@@ -56,19 +62,24 @@ def generate_response(path: str, params: dict):
             ssids = set(network[0].decode() for network in networks) 
             body = web.sta(essid, ssids)
     elif path == '/led':
+        headers.append(HEADER_TYPE.format('html'))
+        v = 0
         if 'v' in params:
             v = int(params['v'])
-            web.led(v)
-        body = web.led()
+        body = web.led(v)
     elif path == '/fav':
+        headers.append(HEADER_TYPE.format('html'))
         body = web.fav()
     else:
+        headers.append(HEADER_TYPE.format('html'))
         sta = network.WLAN(network.STA_IF)
         ip = sta.ifconfig()[0] if sta.isconnected() else ""
         body = web.index(ip)
 
-    header = HEADER.format(status, content)
-    resp = scramble(header, *headers, '\r\n', body)
+    headers.append(HEADER_CLOSE)
+
+    header = HEADER.format(status)
+    resp = scramble(header, *headers, "\r\n" + body)
     
     return resp
 
