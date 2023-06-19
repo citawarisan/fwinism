@@ -63,10 +63,10 @@ gc.threshold(50000)
 ap.active(True)
 ap.config(essid=AP_SSID, password=AP_PASSWORD, authmode=3)
 
-print('\nAccess Point')
-print("SSID:", AP_SSID)
-print("Password:", AP_PASSWORD)
-print("IP:", ap.ifconfig()[0])
+print('\n', 'Access Point')
+print('SSID:', AP_SSID)
+print('Password:', AP_PASSWORD)
+print('IP:', ap.ifconfig()[0], '/n')
 
 s.bind(('', 80))
 s.listen(5)
@@ -77,11 +77,7 @@ while True:
     req = str(conn.recv(1024), 'utf-8')
 
     # skip empty request
-    if not req: 
-        continue 
-
-    # skip some request
-    if any(path in req for path in IGNORE):
+    if not req or any(path in req for path in IGNORE):
         continue
 
     # print('\nConnection:', addr)
