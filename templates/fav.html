@@ -2,26 +2,24 @@
 
 <head>
     <title>Favoriot</title>
-    <link rel="stylesheet" href="/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css *only* works after you've connected to the internet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 
-<body>
+<body class="container">
     <h1>Favoriot</h1>
     <form method="post">
-        <p>
-            <input type="text" name="token" placeholder="Token" required/>
-        </p>
-        <p>
-            <input type="text" name="id" placeholder="ID" required/>
-        </p>
-        <p>
-            <input type="text" name="data" placeholder="Message" required/>
-        </p>
-        <p>
-            <input type="submit"/>
-        </p>        
+        <div class="grid">
+            <input type="text" name="token" placeholder="Token" required />
+            <input type="text" name="id" placeholder="ID" required />
+        </div>
+        <input type="text" name="data" placeholder="Message" required />
+        <input type="submit" />
     </form>
-    <h2><a href="/">Index</a></h2>
+    <footer>
+        <input type="button" value="Back to Index" onclick="window.location.href='/'" />
+    </footer>
 </body>
 
 </html>

@@ -2,17 +2,21 @@
 
 <head>
     <title>LED</title>
-    <link rel="stylesheet" href="/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css *only* works after you've connected to the internet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 
-<body>
+<body class="container">
     <h1>LED</h1>
     <h2>GPIO: {{state}}</h2>
-    <p>
-        <a href="?v=1">ON</a>
-        <a href="?v=0">OFF</a>
-    </p>
-    <h2><a href="/">Index</a></h2>
+    <div class="grid">
+        <input type="button" value="ON" onclick="window.location.href='?v=1'" />
+        <input type="button" value="OFF" onclick="window.location.href='?v=0'" />
+    </div>
+    <footer>
+        <input type="button" value="Back to Index" onclick="window.location.href='/'" />
+    </footer>
 </body>
 
 </html>

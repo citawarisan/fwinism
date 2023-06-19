@@ -2,26 +2,24 @@
 
 <head>
     <title>WLAN</title>
-    <link rel="stylesheet" href="/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css *only* works after you've connected to the internet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 
-<body>
+<body class="container">
     <h1>WLAN</h1>
     <h2>SSID: {{essid}}</h2>
     <form method="POST">
-        <p>
-            <select name="ssid">
-                {{options}}
-            </select>
-        </p>
-        <p>
-            <input type="password" name="pw" placeholder="password"/>
-        </p>
-        <p>
-            <input type="submit"/>
-        </p>
+        <select name="ssid">
+            {{options}}
+        </select>
+        <input type="password" name="pw" placeholder="password" />
+        <input type="submit" />
     </form>
-    <h2><a href="/">Index</a></h2>
+    <footer>
+        <input type="button" value="Back to Index" onclick="window.location.href='/'" />
+    </footer>
 </body>
 
 </html>
