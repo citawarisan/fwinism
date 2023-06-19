@@ -1,4 +1,4 @@
-import re
+import network
 
 import src.web as web
 
@@ -45,18 +45,27 @@ def generate_response(path: str, params: dict):
         content = 'css'
         body = web.css()
     elif path == '/sta':
-        status = STATUS_FOUND
-        body = web.wifi()
+        if 'ssid' in params and 'pw' in params:
+            status = STATUS_FOUND
+            headers.append('Location: /')
+        else:
+            sta = network.WLAN(network.STA_IF)
+            sta.active(True)
+            essid = sta.config('essid') or "None"
+            networks = sta.scan()
+            ssids = set(network[0].decode() for network in networks) 
+            body = web.sta(essid, ssids)
     elif path == '/led':
         if 'v' in params:
             v = int(params['v'])
             web.led(v)
         body = web.led()
     elif path == '/fav':
-        status = STATUS_FOUND
         body = web.fav()
     else:
-        body = web.index()
+        sta = network.WLAN(network.STA_IF)
+        ip = sta.ifconfig()[0] if sta.isconnected() else ""
+        body = web.index(ip)
 
     header = HEADER.format(status, content)
     resp = scramble(header, *headers, '\r\n', body)

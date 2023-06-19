@@ -1,4 +1,3 @@
-import network
 import re
 
 
@@ -16,12 +15,7 @@ def index() -> str:
     return render_template('index.html')
 
 
-def wifi() -> str:
-    sta = network.WLAN(network.STA_IF)
-    sta.active(True)
-    essid = sta.config('essid') or "None"
-    networks = sta.scan()
-    ssids = set(network[0].decode() for network in networks) 
+def sta(essid: str = None, ssids: set = set()) -> str:
     options = "".join(f"<option value='{ssid}'>{ssid}</option>" for ssid in ssids)
     return render_template('sta.html', essid=essid, options=options)
 
