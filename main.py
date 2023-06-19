@@ -76,11 +76,15 @@ while True:
     conn, addr = s.accept()
     req = str(conn.recv(1024), 'utf-8')
 
-    # ignore irrelevant requests
+    # skip empty request
+    if not req: 
+        continue 
+
+    # skip some request
     if any(path in req for path in IGNORE):
         continue
 
-    print('\nConnection:', addr)
+    # print('\nConnection:', addr)
     print(req.splitlines()[0])
 
     # handle request
