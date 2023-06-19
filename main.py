@@ -1,3 +1,11 @@
+"""
+--------------------------------------------------------------------------------
+FWINISM, Front-end Web-based IOT Networking Included System Module
+--------------------------------------------------------------------------------
+A simple web server for ESP32. This was going to be a module, but we ran out of budget (time).
+"""
+
+
 import esp
 import gc
 import usocket as socket
