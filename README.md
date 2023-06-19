@@ -1,3 +1,3 @@
-# FWINISM (Front-end Web-based IOT Networking -ism)
+# FWINISM, Front-end Web-based IOT Networking Included System Module
 
 Accidental discovery.
