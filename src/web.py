@@ -11,8 +11,8 @@ def render_template(name: str, **ctx: dict) -> str:
     return re.sub(r"\{\{(.+?)\}\}", f, open('templates/' + name).read())
 
 
-def index() -> str:
-    return render_template('index.html')
+def index(sta_addr: str) -> str:
+    return render_template('index.html', sta_addr=sta_addr)
 
 
 def sta(essid: str = None, ssids: set = set()) -> str:
