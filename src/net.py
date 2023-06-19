@@ -1,4 +1,5 @@
 import network
+import _thread
 
 import src.web as web
 
@@ -70,6 +71,13 @@ def generate_response(path: str, params: dict):
     elif path == '/fav':
         headers.append(HEADER_TYPE.format('html'))
         body = web.fav()
+    elif path == '/req':
+        if 'token' in params and 'id' in params:
+            status = STATUS_FOUND
+            headers.append(HEADER_LOCATION.format('/'))
+        else:
+            headers.append(HEADER_TYPE.format('html'))
+            body = web.req()
     else:
         headers.append(HEADER_TYPE.format('html'))
         sta = network.WLAN(network.STA_IF)
@@ -95,6 +103,7 @@ def handle_request(req: bytes):
             path, params = get_params(path)
     elif req.startswith('POST'):
         params = post_params(req)
+        # print(params) # debug
 
     resp = generate_response(path, params)
 

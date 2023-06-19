@@ -31,3 +31,7 @@ def led(value: int = 0) -> str:
 
 def fav() -> str:
     return render_template('fav.html')
+
+
+def req() -> str:
+    return render_template('req.html')
