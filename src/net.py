@@ -26,7 +26,7 @@ def parse_query(query: str) -> dict:
     for param in query.split("&"):
         key, value = param.split("=")
         params[key] = value.replace("+", " ").replace("%40", "@")
-    print(params) # debug
+    # print(params) # debug
     return params
 
 
