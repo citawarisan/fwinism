@@ -42,10 +42,10 @@ def wrap_up(path: str, params: dict) -> None:
                 time.sleep(0.5)
             print('\nStation')
             if sta.isconnected():
-                print("IP:", sta.ifconfig()[0])
+                print('Station', 'IP:', sta.ifconfig()[0])
             else:
                 sta.disconnect()
-                print("Failed to connect")
+                print('Failed to connect')
         elif path == "/led":
             v = 0
             if 'v' in params:
@@ -71,10 +71,7 @@ gc.threshold(50000)
 ap.active(True)
 ap.config(essid=AP_SSID, password=AP_PASSWORD, authmode=3)
 
-print('\n', 'Access Point')
-print('SSID:', AP_SSID)
-print('Password:', AP_PASSWORD)
-print('IP:', ap.ifconfig()[0], '/n')
+print('\nAccess Point', 'SSID:', AP_SSID, 'Password:', AP_PASSWORD, 'IP:', ap.ifconfig()[0], '\n')
 
 s.bind(('', 80))
 s.listen(5)
