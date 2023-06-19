@@ -5,15 +5,26 @@
     <title>Fwinism</title>
     <!-- <link rel="stylesheet" href="/css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css *only* works after you've connected to the internet -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 
-<body>
+<body class="container">
     <h1>Index</h1>
-    <h2><a href="/sta" role="button">WIFI</a></h2>
-    <h2><a href="/led" role="button">LED</a></h2>
-    <h2><a href="/fav" role="button">Favoriot</a></h2>
-    <input />
+    <p><b>F</b>ront-end <b>W</b>eb-based <b>I</b>OT <b>N</b>etworking <b>I</b>ncluded <b>S</b>ystem <b>M</b>odule (FWINISM).</p>
+
+    <h2>IP Addresses</h2>
+    <!-- Could implement methods to modify AP IP in future -->
+    <p>Access Point: 192.168.4.1</p> 
+    <p>WLAN: {{sta_addr}}</p>
+
+    <h2>Funtions</h2>
+    <h3>Local</h3>
+    <input type="button" value="Connect to internet" onclick="window.location.href='/sta'" />
+    <input type="button" value="Control ESP32 LED" onclick="window.location.href='/led'" />
+
+    <h3>Internet</h3>
+    <input type="button" value="Send Data to Favoriot" onclick="window.location.href='/fav'" />
 </body>
 
 </html>
