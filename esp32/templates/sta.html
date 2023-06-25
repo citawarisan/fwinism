@@ -3,11 +3,18 @@
 <head>
     <title>WLAN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" onerror="this.onerror=null;this.href='/css';">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+        onerror="this.onerror=null;this.href='/css';">
 </head>
 
 <body class="container">
     <h1>WLAN</h1>
+
+    <ul>
+        <li>This module allows user to connect ESP32 to a WLAN.</li>
+        <li>ESP32 can be connected to a WLAN by selecting the SSID and entering the password.</li>
+    </ul>
+
     <h2>SSID: {{essid}}</h2>
     <form method="POST">
         <select name="ssid">
