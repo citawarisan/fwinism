@@ -1,0 +1,30 @@
+{
+  "name": "com.citawarisan.fwinism",
+  "displayName": "Fwinism",
+  "version": "1.0.0",
+  "description": "Front-end Web-based IOT Networking Included System Module.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Citawarisan",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^12.0.0",
+    "cordova-browser": "^7.0.0",
+    "cordova-custom-config": "^5.1.1",
+    "web": "^0.0.2"
+  },
+  "cordova": {
+    "platforms": [
+      "android",
+      "browser"
+    ],
+    "plugins": {
+      "cordova-custom-config": {}
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Fwinism</title>
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>FWINISM</h1>
+
+        <h2>Instructions</h2>
+        <ol>
+            <li>Prepare a ESP32 flashed with micropython</li>
+            <li>Copy the <a href="https://github.com/citawarisan/fwinism">scripts</a> in <code>esp32</code> directory to ESP32</li>
+            <li>Run the ESP32, connect to the microcontroller's network (ssid: citawarisan, password: citawarisan)</li>
+            <li>Click the button below to start experimenting with the app!</li>
+        </ol>
+
+        <input type="button" value="Go To 196.168.4.1 (ESP32)" onclick="window.location.href='http://192.168.4.1'" />
+
+        <h2>FAQ</h2>
+        <details>
+            <summary>Q: Why is the app not working?</summary>
+            <p>A: Make sure you have connected to the ESP32's network</p>
+        </details>
+
+    </main>
+
+    <footer>
+        <p>Created by Team Citawarisan, 2023</p>
+    </footer>
+
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
