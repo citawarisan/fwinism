@@ -13,7 +13,7 @@
     <!-- <allow-navigation href="http://192.168.4.1/*" /> -->
     <allow-navigation href="*" />
 
-    <icon src="www/img/icon.png" />
+    <icon src="www/img/logo.png" />
 
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/*">
