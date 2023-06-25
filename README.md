@@ -4,7 +4,7 @@ Accidental discovery.
 
 ## ESP32
 
-### Requirements 
+### Requirements
 
 - An ESP32 Microcontroller flashed with Micropython
 - Jumpwires, Breadboard, LED (*optional)
