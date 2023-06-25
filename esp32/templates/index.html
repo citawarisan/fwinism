@@ -5,16 +5,25 @@
     <title>Fwinism</title>
     <!-- <link rel="stylesheet" href="/css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" onerror="this.onerror=null;this.href='/css';">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+        onerror="this.onerror=null;this.href='/css';">
 </head>
 
 <body class="container">
-    <h1>Index</h1>
-    <p><b>F</b>ront-end <b>W</b>eb-based <b>I</b>OT <b>N</b>etworking <b>I</b>ncluded <b>S</b>ystem <b>M</b>odule (FWINISM).</p>
+    <h1>FWINISM</h1>
+    <p><b>F</b>ront-end <b>W</b>eb-based <b>I</b>OT <b>N</b>etworking <b>I</b>ncluded <b>S</b>ystem <b>M</b>odule
+        (FWINISM).</p>
 
     <h2>IP Addresses</h2>
+    
+    <ul>
+        <li>You can access this app by visiting the following IP addresses.</li>
+        <li>To access the app by access point, simply connect the device to ESP32's network and visit the address below.</li>
+        <li>To access the app by WLAN, you'll have to first connect the ESP32 to internet with the "Connect to Internet" module.</li>
+    </ul>
+
     <!-- Could implement methods to modify AP IP in future -->
-    <p>Access Point: <a href="http://192.168.4.1">192.168.4.1</a></p> 
+    <p>Access Point: <a href="http://192.168.4.1">192.168.4.1</a></p>
     <p>WLAN: <a href="http://{{sta_addr}}">{{sta_addr}}</a></p>
 
     <h2>Funtions</h2>
@@ -24,17 +33,25 @@
 
     <h3>Internet</h3>
     <p>Connect to WiFi before using these, idk</p>
-    
+
     <input type="button" value="Send Data to Favoriot" onclick="window.location.href='/fav'" />
     <input type="button" value="Fill in the Requirements" onclick="window.location.href='/req'" />
-    
+
     <footer>
         <details>
             <summary>Created by Team Citawarisan, 2023</summary>
+            <p>App Faction</p>
             <ul>
                 <li>ARUN MUGILAN A/L SARGUNAN (S63746)</li>
                 <li>FARIS ISKANDAR BIN ABD RAHMAN (S62371)</li>
                 <li>MOHAMAD HAZIM BIN MOHD SHAKRI (S61770)</li>
+                <li>GARY LIM KHAI ZHE(S62079)</li>
+            </ul>
+            <p>ESP32 Faction</p>
+            <ul>
+                <li>ARUN MUGILAN A/L SARGUNAN (S63746)</li>
+                <li>DANIAL SOLEHIN B SAFIE (S62091)</li>
+                <li>OMAR ALOMORY (S63995)</li>
                 <li>GARY LIM KHAI ZHE(S62079)</li>
             </ul>
         </details>
