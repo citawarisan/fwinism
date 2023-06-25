@@ -10,7 +10,8 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-navigation href="http://192.168.4.1/*" />
+    <!-- <allow-navigation href="http://192.168.4.1/*" /> -->
+    <allow-navigation href="*" />
 
     <icon src="www/img/icon.png" />
 
